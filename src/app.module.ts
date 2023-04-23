@@ -1,11 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MapsModule } from './maps/maps.module';
-import { MapsdbService } from './mapsdb/mapsdb.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
-  imports: [MapsModule],
+  imports: [forwardRef(() => (MongooseModule.forRoot('mongodb://127.0.0.1:27017/db')))
+    , MapsModule],
   controllers: [],
-  providers: [MapsdbService],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }
